@@ -60,9 +60,9 @@ export default () => {
     return (
         <MemoryRouter initialEntries={['/home']}>
             <div className="app">
-                <div className="top">
+                {/* <div className="top">
                     <NavBar backArrow="">title</NavBar>
-                </div>
+                </div> */}
                 <div className="body">
                     <Routes>
                         <Route element={<Home />} path='/home' />

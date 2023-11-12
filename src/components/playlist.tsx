@@ -1,26 +1,32 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { PullToRefresh, List } from 'antd-mobile'
-import { sleep } from 'antd-mobile/es/utils/sleep'
+// import { sleep } from 'antd-mobile/es/utils/sleep'
 import '../assets/css/playitem.less'
 
 export interface Playitem {
     "src": string
 }
 
-export function Playlist(playlistsrc: Playitem[], selected: number) {
-    console.log(playlistsrc)
-    const [data, setData] = useState(playlistsrc)
-    const [sindex] = useState(selected)
+interface PlaylistProps {
+    playlist: Playitem[];
+    selected: number;
+    onSelectedChange: (newSelected: number) => void;
+    onRefresh: () => void;
+}
+
+
+const Playlist: React.FC<PlaylistProps> = ({playlist , selected, onSelectedChange, onRefresh}) => {
+    console.log(playlist)
     return (
         <PullToRefresh
             onRefresh={async () => {
-                await sleep(1000)
-                setData(playlistsrc)
+                // await sleep(1000)
+                onRefresh()
             }}
         >
-            <List style={{ maxHeight: '70vh', overflow: 'auto' }}>
-                {data.map((item, index) => (
-                    <List.Item className={index == sindex ? 'selectedItem' : 'normalItem'} key={index}>{item.src}</List.Item>
+            <List style={{ height: '70vh', overflow: 'auto' }}>
+                {playlist.map((item, index) => (
+                    <List.Item className={index == selected ? 'selectedItem' : 'normalItem'} onClick={()=>{onSelectedChange(index);}} key={index}>{item.src}</List.Item>
                 ))}
             </List>
         </PullToRefresh>
