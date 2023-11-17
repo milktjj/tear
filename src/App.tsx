@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { NavBar, TabBar } from 'antd-mobile'
+import { TabBar } from 'antd-mobile'
 import {
     Route,
     useNavigate,

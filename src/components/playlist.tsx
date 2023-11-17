@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { PullToRefresh, List } from 'antd-mobile'
 // import { sleep } from 'antd-mobile/es/utils/sleep'
 import '../assets/css/playitem.less'
 
 export interface Playitem {
-    "src": string
+    "t": number
+    "l": boolean
 }
 
 interface PlaylistProps {
@@ -15,7 +16,7 @@ interface PlaylistProps {
 }
 
 
-const Playlist: React.FC<PlaylistProps> = ({playlist , selected, onSelectedChange, onRefresh}) => {
+const Playlist: React.FC<PlaylistProps> = ({ playlist, selected, onSelectedChange, onRefresh }) => {
     console.log(playlist)
     return (
         <PullToRefresh
@@ -26,7 +27,7 @@ const Playlist: React.FC<PlaylistProps> = ({playlist , selected, onSelectedChang
         >
             <List style={{ height: '70vh', overflow: 'auto' }}>
                 {playlist.map((item, index) => (
-                    <List.Item className={index == selected ? 'selectedItem' : 'normalItem'} onClick={()=>{onSelectedChange(index);}} key={index}>{item.src}</List.Item>
+                    <List.Item className={index == selected ? 'selectedItem' : 'normalItem'} onClick={() => { onSelectedChange(index); }} key={index}>{item.t}</List.Item>
                 ))}
             </List>
         </PullToRefresh>
