@@ -111,7 +111,7 @@ const Home: React.FC = () => {
             <AudioPlayer
                 src={currentLink}
                 showSkipControls
-                volume={0.1}
+                volume={1}
                 onClickNext={handleClickNext}
                 onClickPrevious={handleClickPre}
                 autoPlay={false}

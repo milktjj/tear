@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker build -t milktjj/tear-web:latest . --no-cache
+docker build -t milktjj/tear-web:latest .
 
 # docker tag 
 

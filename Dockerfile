@@ -10,7 +10,7 @@ WORKDIR /app
 # 将项目文件复制到工作目录
 COPY . .
 
-RUN yarn config set registry https://registry.npm.taobao.org && yarn install
+RUN yarn config set registry https://registry.npm.taobao.org && yarn config set disturl https://npm.taobao.org/dist && yarn install
 
 RUN yarn build
 

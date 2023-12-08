@@ -1,4 +1,5 @@
-import type { FC } from 'react'
+import { useState, useEffect, type FC } from 'react'
+import { Divider, Switch } from 'antd-mobile'
 import { TabBar } from 'antd-mobile'
 import {
     Route,
@@ -14,6 +15,9 @@ import {
 } from 'antd-mobile-icons'
 import './assets/css/app.less'
 import Home from './pages/home'
+import { FrownOutline, CheckCircleOutline } from 'antd-mobile-icons'
+import { NavBar } from 'antd-mobile'
+import { Ping } from './api/status.tsx';
 
 const Bottom: FC = () => {
     const navigate = useNavigate()
@@ -89,5 +93,27 @@ function Message() {
 }
 
 function PersonalCenter() {
-    return <div>我的</div>
+    const [status, setStatus] = useState<boolean>(false);
+
+    useEffect(() => {
+        Ping().then((res: any) => {
+            setStatus(res?.statys)
+        }).catch(err => {
+            console.log(err)
+        })
+    }, [])
+    return <>
+        <div className='personal'>
+            <NavBar back={null}>设备信息</NavBar>
+            <Divider style={{ width: "100%", height: "1px", padding: "0px", margin: "0px" }} />
+            <div style={{ display: "flex", width: "95%", padding: "0.5rem 0 0 0.5rem", justifyContent: 'space-between' }}>
+                <div style={{ fontSize: 20 }}>设备状态</div>
+                {status ? <CheckCircleOutline style={{ fontSize: 30 }} /> : <FrownOutline style={{ fontSize: 30 }} />}
+            </div>
+            <div style={{ display: "flex", width: "95%", padding: "0.5rem 0 0 0.5rem", justifyContent: 'space-between' }}>
+                <div style={{ fontSize: 20 }}>开启拾音</div>
+                <Switch style={{}} />
+            </div>
+        </div >
+    </>
 }
